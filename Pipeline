@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('BASH') {
+            steps {
+              when { anyOf {
+                enviromen name: "LANGUAGE", value "All"
+                enviromen name: "LANGUAGE", value "BASH"
+              }
+              }
+                echo " "
+            }
+        }
+    }
+}
+
+    stages {
+        stage('Python') {
+            steps {
+              when { anyOf {
+                enviromen name: "LANGUAGE", value "All"
+                enviromen name: "LANGUAGE", value "Python"
+                print(" ")
+            }
+        }
+    }
+}
+
+    stages {
+        stage('C') {
+            steps {
+              when { anyOf {
+                enviromen name: "LANGUAGE", value "All"
+                enviromen name: "LANGUAGE", value "C"
+                printf(" ")
+            }
+        }
+    }
+}
