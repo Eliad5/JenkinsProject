@@ -16,8 +16,8 @@ pipeline {
         stage('BASH') {
             steps {
               when { anyOf {
-                enviromen name: "LANGUAGE", value "All"
-                enviromen name: "LANGUAGE", value "BASH"
+                enviroment name: "LANGUAGE", value "All"
+                enviroment name: "LANGUAGE", value "BASH"
               }
               }
                 echo "Hello BASH"
@@ -28,8 +28,8 @@ pipeline {
         stage('Python') {
             steps {
               when { anyOf {
-                enviromen name: "LANGUAGE", value "All"
-                enviromen name: "LANGUAGE", value "Python"
+                enviroment name: "LANGUAGE", value "All"
+                enviroment name: "LANGUAGE", value "Python"
                 print("Hello Python")
             }
         }
