@@ -40,7 +40,6 @@ pipeline {
     }
     post {
             always {
-                echo 'Saving Results process..'
                 sh '''
                    report_file="${HOME}/Documents/Deployment/report"
                    mkdir -p ${HOME}/Documents/Deployment/
@@ -53,7 +52,7 @@ pipeline {
                    date >> ${report_file}
                    echo "USER-${USER} JOB_NAME-${JOB_NAME}" >> ${report_file}
                    echo "BuildNumber ${BUILD_NUMBER}" >> ${report_file}
-                   cat "${WORKSPACE}/scripts/results" >> ${report_file}
+                   cat "${WORKSPACE}/scriptsdir/results" >> ${report_file}
                    echo "##############################" >> ${report_file}
                '''
             }
