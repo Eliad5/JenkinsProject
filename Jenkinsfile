@@ -2,39 +2,43 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+         stage('Build') {
             steps {
-                echo "Build process.."
                 sh '''
-                    cd ${WORKSPACE}/scripts/
+                    cd ${WORKSPACE}/scriptsdir/
                     chmod 755 *
                     date > results
                   '''
             }
         }
-        
-        stage('BASH') {
+        stage('Bash') {
+            when { anyOf {
+                environment name: 'LANGUAGE', value: 'Bash'
+                environment name: 'LANGUAGE', value: 'All'
+            }
+          }
             steps {
-              when { anyOf {
-                enviroment name: "LANGUAGE", value "All"
-                enviroment name: "LANGUAGE", value "BASH"
-              }
-              }
-                echo "Hello BASH"
+                 sh '''
+                    cd ${WORKSPACE}/scriptsdir/
+                    ./bash.sh >> results
+                  '''
             }
         }
-
         stage('Python') {
+            when { anyOf {
+                environment name: 'LANGUAGE', value: 'Python'
+                environment name: 'LANGUAGE', value: 'All'
+            }
+          }
             steps {
-              when { anyOf {
-                enviroment name: "LANGUAGE", value "All"
-                enviroment name: "LANGUAGE", value "Python"
-                print("Hello Python")
+                sh '''
+                    cd ${WORKSPACE}/scriptsdir/
+                    ./python.py >> results
+                  '''
             }
         }
     }
-
-   post {
+    post {
             always {
                 echo 'Saving Results process..'
                 sh '''
