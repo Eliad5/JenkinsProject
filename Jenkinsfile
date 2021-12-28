@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     stages {
         stage('Build') {
             steps {
@@ -25,9 +24,7 @@ pipeline {
             }
         }
     }
-}
 
-    stages {
         stage('Python') {
             steps {
               when { anyOf {
@@ -37,7 +34,6 @@ pipeline {
             }
         }
     }
-}
 
    post {
             always {
