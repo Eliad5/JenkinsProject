@@ -23,7 +23,6 @@ pipeline {
                 echo "Hello BASH"
             }
         }
-    }
 
         stage('Python') {
             steps {
