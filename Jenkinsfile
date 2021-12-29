@@ -5,7 +5,7 @@ pipeline {
          stage('Build') {
             steps {
                 sh '''
-                    cd /var/lib/jenkins/workspace/JenkinsProject/scriptsdir/
+                    cd ${WORKSPACE}/scriptsdir/
                     chmod 755 *
                     date > results
                   '''
@@ -19,7 +19,7 @@ pipeline {
           }
             steps {
                  sh '''
-                    cd /var/lib/jenkins/workspace/JenkinsProject/scriptsdir/
+                    cd ${WORKSPACE}/scriptsdir/
                     ./bash.sh >> results
                   '''
             }
@@ -32,7 +32,7 @@ pipeline {
           }
             steps {
                 sh '''
-                    cd /var/lib/jenkins/workspace/JenkinsProject/scriptsdir/
+                    cd ${WORKSPACE}/scriptsdir/
                     ./python.py >> results
                   '''
             }
@@ -52,7 +52,7 @@ pipeline {
                    date >> ${reports_file}
                    echo "USER-${USER} JOB_NAME-${JOB_NAME}" >> ${reports_file}
                    echo "BuildNumber ${BUILD_NUMBER}" >> ${reports_file}
-                   cat "/var/lib/jenkins/workspace/JenkinsProject/scriptsdir/results" >> ${reports_file}
+                   cat "${WORKSPACE}/scriptsdir//results" >> ${reports_file}
                    echo "##############################" >> ${reports_file}
                '''
             }
