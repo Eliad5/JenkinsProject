@@ -41,19 +41,19 @@ pipeline {
     post {
             always {
                 sh '''
-                   report_file="${HOME}/Documents/Deployment/report"
+                   reports_file="${HOME}/Documents/Deployment/reports"
                    mkdir -p ${HOME}/Documents/Deployment/
-                   if [ -f "${report_file}" ]
+                   if [ -f "${reports_file}" ]
                    then
-                       echo "file ${report_file} exists"
+                       echo "file ${reports_file} exists"
                    else
-                       touch ${report_file}
+                       touch ${reports_file}
                    fi
-                   date >> ${report_file}
-                   echo "USER-${USER} JOB_NAME-${JOB_NAME}" >> ${report_file}
-                   echo "BuildNumber ${BUILD_NUMBER}" >> ${report_file}
-                   cat "${WORKSPACE}/scriptsdir/results" >> ${report_file}
-                   echo "##############################" >> ${report_file}
+                   date >> ${reports_file}
+                   echo "USER-${USER} JOB_NAME-${JOB_NAME}" >> ${reports_file}
+                   echo "BuildNumber ${BUILD_NUMBER}" >> ${reports_file}
+                   cat "${WORKSPACE}/scriptsdir/results" >> ${reports_file}
+                   echo "##############################" >> ${reports_file}
                '''
             }
         }
